@@ -1,8 +1,12 @@
-DROP TABLE if EXISTS address;
-DROP TABLE if EXISTS employee;
-DROP TABLE if EXISTS field;
-DROP TABLE if EXISTS skills;
+BEGIN TRANSACTION;
+
 DROP TABLE if EXISTS employee_to_skills;
+DROP TABLE if EXISTS skills;
+DROP TABLE if EXISTS fields;
+DROP TABLE if EXISTS employee;
+DROP TABLE if EXISTS address;
+
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 CREATE TABLE address(
     address_id uuid NOT NULL,
@@ -35,10 +39,10 @@ CREATE TABLE fields(
     field_id uuid NOT NULL,
     name varchar(100) NOT NULL,
     type varchar(100) NOT NULL,
-    CONSTRAINT PK_address PRIMARY KEY (field_id)
+    CONSTRAINT PK_field PRIMARY KEY (field_id)
 );
 
-create table skills(
+CREATE TABLE skills(
     skills_id uuid NOT NULL,
     experience int DEFAULT 0,
     summary varchar(500),
@@ -53,3 +57,4 @@ CREATE TABLE employee_to_skills(
     CONSTRAINT FK_employee FOREIGN KEY (employee_id) REFERENCES employee(employee_id),
     CONSTRAINT FK_skills FOREIGN KEY (skills_id) REFERENCES skills(skills_id)
 );
+COMMIT TRANSACTION;
