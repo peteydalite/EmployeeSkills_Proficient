@@ -7,28 +7,30 @@ public class Employee {
     private UUID employee_id;
     private String firstName;
     private String lastName;
-    private UUID address_id;
+    private Address address;
     private String contactEmail;
     private String companyEmail;
     private LocalDate birthdate;
     private LocalDate hireDate;
     private String role;
     private String businessUnit;
+    private Skills[] skills;
     private UUID assignedTo;
 
     public Employee(){};
 
-    public Employee(UUID employee_id, String firstName, String lastName, UUID address_id, String contactEmail, String companyEmail, LocalDate birthdate, LocalDate hireDate, String role, String businessUnit, UUID assignedTo) {
+    public Employee(UUID employee_id, String firstName, String lastName, Address address, String contactEmail, String companyEmail, LocalDate birthdate, LocalDate hireDate, String role, String businessUnit, Skills[] skills, UUID assignedTo) {
         this.employee_id = employee_id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.address_id = address_id;
+        this.address = address;
         this.contactEmail = contactEmail;
         this.companyEmail = companyEmail;
         this.birthdate = birthdate;
         this.hireDate = hireDate;
         this.role = role;
         this.businessUnit = businessUnit;
+        this.skills = skills;
         this.assignedTo = assignedTo;
     }
 
@@ -38,6 +40,22 @@ public class Employee {
 
     public void setEmployee_id(UUID employee_id) {
         this.employee_id = employee_id;
+    }
+
+    public Address getAddress() {
+
+        return address;
+    }
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public Skills[] getSkills() {
+        return skills;
+    }
+
+    public void setSkills(Skills[] skills) {
+        this.skills = skills;
     }
 
     public String getFirstName() {
@@ -54,14 +72,6 @@ public class Employee {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public UUID getAddress_id() {
-        return address_id;
-    }
-
-    public void setAddress_id(UUID address_id) {
-        this.address_id = address_id;
     }
 
     public String getContactEmail() {
