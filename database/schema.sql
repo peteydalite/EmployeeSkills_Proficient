@@ -11,9 +11,9 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 CREATE TABLE address(
     address_id uuid NOT NULL,
     street varchar(70) NOT NULL,
-    suit varchar(70),
+    suite varchar(70),
     city char(70) NOT NULL,
-    region char(70) NOT NULL,
+    region char(3) NOT NULL,
     postal int NOT NULL,
     country char(100) NOT NULL,
     CONSTRAINT PK_address PRIMARY KEY (address_id)
