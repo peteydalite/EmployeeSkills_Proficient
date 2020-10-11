@@ -23,7 +23,7 @@ public class SkillService implements SkillDao {
 
     private Skill mapRowToSkill(SqlRowSet rs){
         Skill skill = new Skill();
-        skill.setSkill_id((java.util.UUID) rs.getObject("skills_id"));
+        skill.setSkill_id((java.util.UUID) rs.getObject("skill_id"));
         skill.setExperience(rs.getInt("experience"));
         skill.setSummary(rs.getString("summary"));
         skill.setField(fieldService.getFieldById((java.util.UUID) rs.getObject("field_id")));
@@ -65,7 +65,7 @@ public class SkillService implements SkillDao {
     @Override
     public Skill getSkillById(UUID id) {
         Skill skill = null;
-        String sqlSelect = "Select * from Skills where skills_id = ? ";
+        String sqlSelect = "Select * from Skills where skill_id = ? ";
         try{
             SqlRowSet result = this.jdbc.queryForRowSet(sqlSelect,id);
             if(result.next()){
@@ -81,7 +81,7 @@ public class SkillService implements SkillDao {
     public boolean updateSkill(Skill skill) {
         boolean updated = false;
         String sqlUpdate = "Update Skills Set experience = ?, " +
-                            "summary = ?, field_id = ? Where skills_id = ? ";
+                            "summary = ?, field_id = ? Where skill_id = ? ";
         try{
             updated = this.jdbc.update(sqlUpdate, skill.getExperience(), skill.getSummary(),
                     skill.getField().getField_id(), skill.getSkill_id()) == 1;
@@ -93,21 +93,21 @@ public class SkillService implements SkillDao {
 
     @Override
     public boolean addSkill(Skill skill) {
-        boolean added = false;
+        boolean addedToSkill = false;
         String sqlInsert = "Insert into Skills Values (?, ?, ?, ?) ";
         try{
-            added = this.jdbc.update(sqlInsert, UUID.randomUUID(), skill.getExperience(),
+            addedToSkill = this.jdbc.update(sqlInsert, UUID.randomUUID(), skill.getExperience(),
                     skill.getSummary(), skill.getField().getField_id()) == 1;
         }catch(Exception e){
             System.out.println(e);
         }
-        return added;
+        return addedToSkill;
     }
 
     @Override
     public boolean deleteSkill(Skill skill) {
         boolean deleted = false;
-        String sqlDelete = "Delete from Skills where skills_id = ? ";
+        String sqlDelete = "Delete from Skills where skill_id = ? ";
         try{
             deleted = this.jdbc.update(sqlDelete, skill.getSkill_id()) == 1;
         }catch(Exception e){

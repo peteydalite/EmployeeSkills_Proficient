@@ -1,6 +1,7 @@
 package com.peteydalite.EmployeeSkills.model;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.UUID;
 
 public class Employee {
@@ -128,5 +129,23 @@ public class Employee {
 
     public void setAssignedTo(UUID assignedTo) {
         this.assignedTo = assignedTo;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "employee_id=" + employee_id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", address=" + address +
+                ", contactEmail='" + contactEmail + '\'' +
+                ", companyEmail='" + companyEmail + '\'' +
+                ", birthdate=" + birthdate +
+                ", hireDate=" + hireDate +
+                ", role='" + role + '\'' +
+                ", businessUnit='" + businessUnit + '\'' +
+                ", skills=" + Arrays.toString(skills) +
+                ", assignedTo=" + assignedTo +
+                '}';
     }
 }
