@@ -14,12 +14,12 @@ public class Employee {
     private LocalDate hireDate;
     private String role;
     private String businessUnit;
-    private Skills[] skills;
+    private Skill[] skills;
     private UUID assignedTo;
 
     public Employee(){};
 
-    public Employee(UUID employee_id, String firstName, String lastName, Address address, String contactEmail, String companyEmail, LocalDate birthdate, LocalDate hireDate, String role, String businessUnit, Skills[] skills, UUID assignedTo) {
+    public Employee(UUID employee_id, String firstName, String lastName, Address address, String contactEmail, String companyEmail, LocalDate birthdate, LocalDate hireDate, String role, String businessUnit, Skill[] skills, UUID assignedTo) {
         this.employee_id = employee_id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -50,11 +50,11 @@ public class Employee {
         this.address = address;
     }
 
-    public Skills[] getSkills() {
+    public Skill[] getSkills() {
         return skills;
     }
 
-    public void setSkills(Skills[] skills) {
+    public void setSkills(Skill[] skills) {
         this.skills = skills;
     }
 

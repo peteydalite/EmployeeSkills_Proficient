@@ -1,5 +1,6 @@
 package com.peteydalite.EmployeeSkills.service;
 
+import com.peteydalite.EmployeeSkills.dao.AddressDao;
 import com.peteydalite.EmployeeSkills.model.Address;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Service;

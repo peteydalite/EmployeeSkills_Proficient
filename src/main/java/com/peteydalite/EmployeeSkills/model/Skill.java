@@ -2,27 +2,37 @@ package com.peteydalite.EmployeeSkills.model;
 
 import java.util.UUID;
 
-public class Skills {
-    private UUID skills_id;
+public class Skill {
+    private UUID skill_id;
+    private Field field;
     private int experience;
     private String summary;
-    private UUID field_id;
 
-    public Skills(){};
+    public Skill() {
+    }
 
-    public Skills(UUID skills_id, int experience, String summary, UUID field_id) {
-        this.skills_id = skills_id;
+
+    public Skill(UUID skill_id, Field field, int experience, String summary) {
+        this.skill_id = skill_id;
+        this.field = field;
         this.experience = experience;
         this.summary = summary;
-        this.field_id = field_id;
     }
 
-    public UUID getSkills_id() {
-        return skills_id;
+    public UUID getSkill_id() {
+        return skill_id;
     }
 
-    public void setSkills_id(UUID skills_id) {
-        this.skills_id = skills_id;
+    public void setSkill_id(UUID skill_id) {
+        this.skill_id = skill_id;
+    }
+
+    public Field getField() {
+        return field;
+    }
+
+    public void setField(Field field) {
+        this.field = field;
     }
 
     public int getExperience() {
@@ -41,11 +51,14 @@ public class Skills {
         this.summary = summary;
     }
 
-    public UUID getField_id() {
-        return field_id;
-    }
+    @Override
+    public String toString() {
+        return "Skill{" +
+                "skill_id=" + skill_id +
+                ", field=" + field +
+                ", experience=" + experience +
+                ", summary='" + summary + '\'' +
+                '}';
 
-    public void setField_id(UUID field_id) {
-        this.field_id = field_id;
     }
 }

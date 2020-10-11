@@ -1,4 +1,4 @@
-package com.peteydalite.EmployeeSkills.service;
+package com.peteydalite.EmployeeSkills.dao;
 
 import com.peteydalite.EmployeeSkills.model.Employee;
 
