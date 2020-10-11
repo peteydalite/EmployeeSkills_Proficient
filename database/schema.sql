@@ -57,4 +57,8 @@ CREATE TABLE employee_to_skills(
     CONSTRAINT FK_employee FOREIGN KEY (employee_id) REFERENCES employee(employee_id),
     CONSTRAINT FK_skills FOREIGN KEY (skills_id) REFERENCES skills(skills_id)
 );
+
+INSERT INTO Fields VALUES ('0cf253e7-930d-4478-b6de-942034801655', 'Test Field','TEST');
+INSERT INTO Fields VALUES ('2d0b1e71-5268-42e1-964c-fcdce6e0b62e', 'Machine Learning', 'Research and Development');
+
 COMMIT TRANSACTION;
