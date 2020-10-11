@@ -23,7 +23,7 @@ public class SkillService implements SkillDao {
 
     private Skill mapRowToSkill(SqlRowSet rs){
         Skill skill = new Skill();
-        skill.setSkill_id((java.util.UUID) rs.getObject("skill_id"));
+        skill.setSkill_id((java.util.UUID) rs.getObject("skills_id"));
         skill.setExperience(rs.getInt("experience"));
         skill.setSummary(rs.getString("summary"));
         skill.setField(fieldService.getFieldById((java.util.UUID) rs.getObject("field_id")));
@@ -47,27 +47,72 @@ public class SkillService implements SkillDao {
     }
 
     @Override
-    public List<Skill> getSkillsbyFieldId() {
-        return null;
+    public List<Skill> getSkillsbyFieldId(UUID field_id) {
+        List<Skill> skillsByField = new ArrayList<>();
+        String sqlSelect = "Select * from Skills where field_id = ? ";
+        try{
+            SqlRowSet result = this.jdbc.queryForRowSet(sqlSelect, field_id);
+            while (result.next()){
+                Skill skill = mapRowToSkill(result);
+                skillsByField.add(skill);
+            }
+        }catch(Exception e){
+            System.out.println(e);
+        }
+        return skillsByField;
     }
 
     @Override
     public Skill getSkillById(UUID id) {
-        return null;
+        Skill skill = null;
+        String sqlSelect = "Select * from Skills where skills_id = ? ";
+        try{
+            SqlRowSet result = this.jdbc.queryForRowSet(sqlSelect,id);
+            if(result.next()){
+                skill = this.mapRowToSkill(result);
+            }
+        }catch(Exception e){
+            System.out.println(e);
+        }
+        return skill;
     }
 
     @Override
     public boolean updateSkill(Skill skill) {
-        return false;
+        boolean updated = false;
+        String sqlUpdate = "Update Skills Set experience = ?, " +
+                            "summary = ?, field_id = ? Where skills_id = ? ";
+        try{
+            updated = this.jdbc.update(sqlUpdate, skill.getExperience(), skill.getSummary(),
+                    skill.getField().getField_id(), skill.getSkill_id()) == 1;
+        }catch (Exception e){
+            System.out.println(e);
+        }
+        return updated;
     }
 
     @Override
     public boolean addSkill(Skill skill) {
-        return false;
+        boolean added = false;
+        String sqlInsert = "Insert into Skills Values (?, ?, ?, ?) ";
+        try{
+            added = this.jdbc.update(sqlInsert, UUID.randomUUID(), skill.getExperience(),
+                    skill.getSummary(), skill.getField().getField_id()) == 1;
+        }catch(Exception e){
+            System.out.println(e);
+        }
+        return added;
     }
 
     @Override
     public boolean deleteSkill(Skill skill) {
-        return false;
+        boolean deleted = false;
+        String sqlDelete = "Delete from Skills where skills_id = ? ";
+        try{
+            deleted = this.jdbc.update(sqlDelete, skill.getSkill_id()) == 1;
+        }catch(Exception e){
+            System.out.println(e);
+        }
+        return deleted;
     }
 }

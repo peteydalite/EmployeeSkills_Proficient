@@ -30,7 +30,7 @@ CREATE TABLE employee(
     hire_date date NOT NULL,
     role char(100) DEFAULT  'Technical Consultant',
     business_unit varchar(100),
-    assigned_to uuid NOT NULL,
+    assigned_to uuid,
     CONSTRAINT PK_employee PRIMARY KEY (employee_id),
     CONSTRAINT FK_address FOREIGN KEY (address_id) REFERENCES address(address_id)
 );
@@ -58,7 +58,11 @@ CREATE TABLE employee_to_skills(
     CONSTRAINT FK_skills FOREIGN KEY (skills_id) REFERENCES skills(skills_id)
 );
 
+INSERT INTO Address VALUES ('bb4d5a82-dee3-408e-97fe-4fd9e1a87982', '123 Fake St', 'Unit 999', 'Test', 'MD', 67831, 'United States');
+INSERT INTO Employee (employee_id, firstname, lastname, address_id, contact_email, company_email, birthdate, hire_date, role, business_unit)  VALUES('d767d568-0bf8-11eb-adc1-0242ac120002', 'TestF', 'TestL', 'bb4d5a82-dee3-408e-97fe-4fd9e1a87982', null, 'test@company.com', '1999-10-10', '2020-01-05', 'Technical Consultant', 'IBM');
 INSERT INTO Fields VALUES ('0cf253e7-930d-4478-b6de-942034801655', 'Test Field','TEST');
 INSERT INTO Fields VALUES ('2d0b1e71-5268-42e1-964c-fcdce6e0b62e', 'Machine Learning', 'Research and Development');
+INSERT INTO Skills Values ('d2923b32-7b04-400e-a217-947cb80f0e1c', 2, 'Continuous Education', '2d0b1e71-5268-42e1-964c-fcdce6e0b62e');
+INSERT INTO employee_to_skills VALUES( 'd767d568-0bf8-11eb-adc1-0242ac120002', 'd2923b32-7b04-400e-a217-947cb80f0e1c');
 
 COMMIT TRANSACTION;

@@ -78,8 +78,8 @@ public class AddressServiceTest extends DaoIntergrationTest{
     public void updateAddress() {
         Address test = new Address();
         test.setStreet("123 Fake St");
-        test.setCity("Chitty");
-        test.setRegion("OH");
+        test.setCity("Test");
+        test.setRegion("MD");
         test.setPostal(12345L);
         test.setCountry("United States");
 
@@ -91,7 +91,7 @@ public class AddressServiceTest extends DaoIntergrationTest{
         this.addressServive.updateAddress(toChange);
 
         Address changed = this.addressServive.getAddressById(toChange.getAddress_id());
-
+        System.out.println(changed.toString());
         assertEquals(toChange.getCountry().trim(), changed.getCountry().trim());
     }
 
