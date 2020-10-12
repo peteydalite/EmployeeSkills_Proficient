@@ -3,6 +3,12 @@
   <h1>
       {{employee.firstName}} {{employee.lastName}}
   </h1>
+  <!-- 
+      Goal: Display employee info
+      allow user to edit when edit button is clicked
+
+      allow user to add skills
+   -->
   <div id="about">
       <h3>Personal</h3>
     <input :disabled="true" type="text" v-bind:value="employee.address.street" :placeholder="employee.address.street">
