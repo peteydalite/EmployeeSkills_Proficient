@@ -21,7 +21,7 @@ public class FieldService implements FieldDao {
 
     private Field mapRowToField(SqlRowSet rs){
         Field field = new Field();
-        field.setField_id((java.util.UUID) rs.getObject("field_id"));
+        field.setId((java.util.UUID) rs.getObject("field_id"));
         field.setName(rs.getString("name"));
         field.setType(rs.getString("type"));
 
@@ -38,7 +38,7 @@ public class FieldService implements FieldDao {
                 allFields.add(field);
             }
         }catch(Exception e){
-            System.out.println(e);
+            throw(e);
         }
         return allFields;
     }
@@ -54,7 +54,7 @@ public class FieldService implements FieldDao {
                 fieldsByType.add(field);
             }
         }catch(Exception e){
-            System.out.println(e);
+            throw(e);
         }
         return fieldsByType;
     }
@@ -69,7 +69,7 @@ public class FieldService implements FieldDao {
                 field = mapRowToField(result);
             }
         }catch (Exception e){
-            System.out.println(e);
+            throw(e);
         }
         return field;
     }
@@ -84,7 +84,7 @@ public class FieldService implements FieldDao {
                 field = mapRowToField(result);
             }
         }catch (Exception e){
-            System.out.println(e);
+            throw(e);
         }
         return field;
     }
@@ -95,9 +95,9 @@ public class FieldService implements FieldDao {
         String sqlInsert = "Insert into Fields values (?,?,?) ";
 
         try {
-            added = this.jdbc.update(sqlInsert,UUID.randomUUID(), field.getName(), field.getType()) == 1;
+            added = this.jdbc.update(sqlInsert, field.getId(), field.getName(), field.getType()) == 1;
         }catch (Exception e){
-            System.out.println(e);
+            throw(e);
         }
         return added;
     }
@@ -107,9 +107,9 @@ public class FieldService implements FieldDao {
         boolean updated = false;
         String sqlUpdated = "Update Fields set name = ?, type = ? Where field_id = ? ";
         try {
-            updated = this.jdbc.update(sqlUpdated, field.getName(), field.getType(), field.getField_id()) == 1;
+            updated = this.jdbc.update(sqlUpdated, field.getName(), field.getType(), field.getId()) == 1;
         }catch (Exception e){
-            System.out.println(e);
+            throw(e);
         }
         return updated;
     }
@@ -119,9 +119,9 @@ public class FieldService implements FieldDao {
         boolean deleted = false;
         String delete = "Delete from Fields where field_id = ? ";
         try{
-            deleted = this.jdbc.update(delete, field.getField_id()) == 1;
+            deleted = this.jdbc.update(delete, field.getId()) == 1;
         }catch (Exception e){
-            System.out.println(e);
+            throw(e);
         }
         return deleted;
     }

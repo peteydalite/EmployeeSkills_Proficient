@@ -1,18 +1,17 @@
 package com.peteydalite.EmployeeSkills.model;
 
-import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.UUID;
 
 public class Employee {
-    private UUID employee_id;
+    private UUID id;
     private String firstName;
     private String lastName;
     private Address address;
     private String contactEmail;
     private String companyEmail;
-    private LocalDate birthdate;
-    private LocalDate hireDate;
+    private String birthdate;
+    private String hireDate;
     private String role;
     private String businessUnit;
     private Skill[] skills;
@@ -20,8 +19,8 @@ public class Employee {
 
     public Employee(){};
 
-    public Employee(UUID employee_id, String firstName, String lastName, Address address, String contactEmail, String companyEmail, LocalDate birthdate, LocalDate hireDate, String role, String businessUnit, Skill[] skills, UUID assignedTo) {
-        this.employee_id = employee_id;
+    public Employee(UUID Id, String firstName, String lastName, Address address, String contactEmail, String companyEmail, String birthdate, String hireDate, String role, String businessUnit, Skill[] skills, UUID assignedTo) {
+        this.id = Id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
@@ -35,12 +34,12 @@ public class Employee {
         this.assignedTo = assignedTo;
     }
 
-    public UUID getEmployee_id() {
-        return employee_id;
+    public UUID getId() {
+        return id;
     }
 
-    public void setEmployee_id(UUID employee_id) {
-        this.employee_id = employee_id;
+    public void setId(UUID Id) {
+        this.id = Id;
     }
 
     public Address getAddress() {
@@ -91,19 +90,19 @@ public class Employee {
         this.companyEmail = companyEmail;
     }
 
-    public LocalDate getBirthdate() {
+    public String getBirthdate() {
         return birthdate;
     }
 
-    public void setBirthdate(LocalDate birthdate) {
+    public void setBirthdate(String birthdate) {
         this.birthdate = birthdate;
     }
 
-    public LocalDate getHireDate() {
+    public String getHireDate() {
         return hireDate;
     }
 
-    public void setHireDate(LocalDate hireDate) {
+    public void setHireDate(String hireDate) {
         this.hireDate = hireDate;
     }
 
@@ -134,7 +133,7 @@ public class Employee {
     @Override
     public String toString() {
         return "Employee{" +
-                "employee_id=" + employee_id +
+                "Id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", address=" + address +

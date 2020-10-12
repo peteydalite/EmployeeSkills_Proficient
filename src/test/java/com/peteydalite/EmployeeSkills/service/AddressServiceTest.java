@@ -69,9 +69,9 @@ public class AddressServiceTest extends DaoIntergrationTest{
 
         assertEquals(listBefore.size() + 1, addressList.size());
 
-        Address result = this.addressServive.getAddressById(addressList.get(0).getAddress_id());
+        Address result = this.addressServive.getAddressById(addressList.get(0).getId());
 
-        assertEquals(addressList.get(0).getAddress_id(), result.getAddress_id());
+        assertEquals(addressList.get(0).getId(), result.getId());
     }
 
     @Test
@@ -90,7 +90,7 @@ public class AddressServiceTest extends DaoIntergrationTest{
         toChange.setCountry("TEST");
         this.addressServive.updateAddress(toChange);
 
-        Address changed = this.addressServive.getAddressById(toChange.getAddress_id());
+        Address changed = this.addressServive.getAddressById(toChange.getId());
         System.out.println(changed.toString());
         assertEquals(toChange.getCountry().trim(), changed.getCountry().trim());
     }

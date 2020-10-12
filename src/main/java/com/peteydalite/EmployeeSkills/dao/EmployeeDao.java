@@ -10,5 +10,5 @@ public interface EmployeeDao {
     Employee getEmployeeById(UUID employee_id);
     boolean updateEmployee(Employee updateEmployee);
     boolean addEmployee(Employee newEmployee);
-    boolean deleteEmployee(Employee deleteEmployee);
+    boolean deleteEmployee(UUID deleteEmployee);
 }

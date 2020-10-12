@@ -1,6 +1,7 @@
 package com.peteydalite.EmployeeSkills.service;
 
 import com.peteydalite.EmployeeSkills.dao.SkillDao;
+import com.peteydalite.EmployeeSkills.model.Field;
 import com.peteydalite.EmployeeSkills.model.Skill;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -23,7 +24,7 @@ public class SkillService implements SkillDao {
 
     private Skill mapRowToSkill(SqlRowSet rs){
         Skill skill = new Skill();
-        skill.setSkill_id((java.util.UUID) rs.getObject("skill_id"));
+        skill.setId((java.util.UUID) rs.getObject("skill_id"));
         skill.setExperience(rs.getInt("experience"));
         skill.setSummary(rs.getString("summary"));
         skill.setField(fieldService.getFieldById((java.util.UUID) rs.getObject("field_id")));
@@ -40,7 +41,7 @@ public class SkillService implements SkillDao {
                 allSkills.add(skill);
             }
         }catch (Exception e){
-            System.out.println(e);
+            throw(e);
         }
 
         return allSkills;
@@ -57,7 +58,7 @@ public class SkillService implements SkillDao {
                 skillsByField.add(skill);
             }
         }catch(Exception e){
-            System.out.println(e);
+            throw(e);
         }
         return skillsByField;
     }
@@ -72,7 +73,7 @@ public class SkillService implements SkillDao {
                 skill = this.mapRowToSkill(result);
             }
         }catch(Exception e){
-            System.out.println(e);
+            throw(e);
         }
         return skill;
     }
@@ -84,9 +85,9 @@ public class SkillService implements SkillDao {
                             "summary = ?, field_id = ? Where skill_id = ? ";
         try{
             updated = this.jdbc.update(sqlUpdate, skill.getExperience(), skill.getSummary(),
-                    skill.getField().getField_id(), skill.getSkill_id()) == 1;
+                    skill.getField().getId(), skill.getId()) == 1;
         }catch (Exception e){
-            System.out.println(e);
+            throw(e);
         }
         return updated;
     }
@@ -96,10 +97,14 @@ public class SkillService implements SkillDao {
         boolean addedToSkill = false;
         String sqlInsert = "Insert into Skills Values (?, ?, ?, ?) ";
         try{
-            addedToSkill = this.jdbc.update(sqlInsert, UUID.randomUUID(), skill.getExperience(),
-                    skill.getSummary(), skill.getField().getField_id()) == 1;
+            Field temp = this.fieldService.getFieldById(skill.getField().getId());
+            if(temp == null){
+                this.fieldService.addField(skill.getField());
+            }
+            addedToSkill = this.jdbc.update(sqlInsert, skill.getId(), skill.getExperience(),
+                    skill.getSummary(), skill.getField().getId()) == 1;
         }catch(Exception e){
-            System.out.println(e);
+            throw(e);
         }
         return addedToSkill;
     }
@@ -109,9 +114,9 @@ public class SkillService implements SkillDao {
         boolean deleted = false;
         String sqlDelete = "Delete from Skills where skill_id = ? ";
         try{
-            deleted = this.jdbc.update(sqlDelete, skill.getSkill_id()) == 1;
+            deleted = this.jdbc.update(sqlDelete, skill.getId()) == 1;
         }catch(Exception e){
-            System.out.println(e);
+            throw(e);
         }
         return deleted;
     }

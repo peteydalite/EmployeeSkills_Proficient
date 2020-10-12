@@ -63,10 +63,10 @@ public class FieldServiceTest extends DaoIntergrationTest{
     @Test
     public void getFieldById() {
         List<Field> fields = this.fieldService.getAllFields();
-        UUID id = fields.get(0).getField_id();
+        UUID id = fields.get(0).getId();
         Field result = this.fieldService.getFieldById(id);
 
-        assertEquals(id, result.getField_id());
+        assertEquals(id, result.getId());
     }
 
     @Test
@@ -88,7 +88,7 @@ public class FieldServiceTest extends DaoIntergrationTest{
 
         assertEquals(true, updated);
 
-        Field result = this.fieldService.getFieldById(toChange.getField_id());
+        Field result = this.fieldService.getFieldById(toChange.getId());
 
         assertEquals(toChange.getName(), result.getName());
     }

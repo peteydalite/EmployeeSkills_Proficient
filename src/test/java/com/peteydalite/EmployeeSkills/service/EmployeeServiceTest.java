@@ -32,12 +32,12 @@ public class EmployeeServiceTest extends DaoIntergrationTest{
 
         Address address = this.addressService.getAllAddress().get(0);
         Employee newEmp = new Employee();
-        newEmp.setEmployee_id(UUID.randomUUID());
+        newEmp.setId(UUID.randomUUID());
         newEmp.setFirstName("TEST");
         newEmp.setLastName("TEST");
         newEmp.setCompanyEmail("TEST@company.com");
-        newEmp.setBirthdate(LocalDate.of(1990, 12,12));
-        newEmp.setHireDate(LocalDate.now());
+        newEmp.setBirthdate("1990-12-12");
+        newEmp.setHireDate(LocalDate.now().toString());
         newEmp.setRole("Director");
         newEmp.setAddress(address);
 
@@ -48,12 +48,12 @@ public class EmployeeServiceTest extends DaoIntergrationTest{
         List<Employee> listBefore = this.empService.getAllEmployees();
         Address address = this.addressService.getAllAddress().get(0);
         Employee newEmp = new Employee();
-        newEmp.setEmployee_id(UUID.randomUUID());
+        newEmp.setId(UUID.randomUUID());
         newEmp.setFirstName("TEST99");
         newEmp.setLastName("TEST99");
         newEmp.setCompanyEmail("TEST99@company.com");
-        newEmp.setBirthdate(LocalDate.of(1990, 12,12));
-        newEmp.setHireDate(LocalDate.now());
+        newEmp.setBirthdate("1990-12-12");
+        newEmp.setHireDate(LocalDate.now().toString());
         newEmp.setRole("Technical Consultant");
         newEmp.setAddress(address);
 
@@ -67,9 +67,9 @@ public class EmployeeServiceTest extends DaoIntergrationTest{
     @Test
     public void getEmployeeById() {
         Employee test = this.empService.getAllEmployees().get(0);
-        Employee result = this.empService.getEmployeeById(test.getEmployee_id());
+        Employee result = this.empService.getEmployeeById(test.getId());
 
-        assertEquals(test.getEmployee_id(), result.getEmployee_id());
+        assertEquals(test.getId(), result.getId());
 
     }
 
@@ -83,7 +83,7 @@ public class EmployeeServiceTest extends DaoIntergrationTest{
 
         boolean updated = this.empService.updateEmployee(test);
         assertEquals(true, updated);
-        Employee result = this.empService.getEmployeeById(test.getEmployee_id());
+        Employee result = this.empService.getEmployeeById(test.getId());
 
         assertEquals("Bobby", result.getFirstName().trim());
         assertEquals("999 Test", result.getAddress().getSuite());
@@ -93,12 +93,12 @@ public class EmployeeServiceTest extends DaoIntergrationTest{
     public void addEmployee() {
         Address address = this.addressService.getAllAddress().get(0);
         Employee newEmp = new Employee();
-        newEmp.setEmployee_id(UUID.randomUUID());
+        newEmp.setId(UUID.randomUUID());
         newEmp.setFirstName("Rick");
         newEmp.setLastName("Stan");
         newEmp.setCompanyEmail("rick@company.com");
-        newEmp.setBirthdate(LocalDate.of(1990, 12,12));
-        newEmp.setHireDate(LocalDate.now());
+        newEmp.setBirthdate("1990-12-12");
+        newEmp.setHireDate(LocalDate.now().toString());
         newEmp.setRole("Project Manager");
         newEmp.setAddress(address);
 
@@ -111,10 +111,10 @@ public class EmployeeServiceTest extends DaoIntergrationTest{
     public void deleteEmployee() {
         Employee test = this.empService.getAllEmployees().get(0);
 
-        this.etsService.deleteEmployeeAll(test.getEmployee_id());
-        boolean deleted = this.empService.deleteEmployee(test);
+        this.etsService.deleteEmployeeAll(test.getId());
+        boolean deleted = this.empService.deleteEmployee(test.getId());
 
-        Employee result = this.empService.getEmployeeById(test.getEmployee_id());
+        Employee result = this.empService.getEmployeeById(test.getId());
 
         assertEquals(true, deleted);
         assertEquals(null, result);

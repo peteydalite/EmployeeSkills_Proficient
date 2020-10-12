@@ -43,19 +43,19 @@ CREATE TABLE fields(
 );
 
 CREATE TABLE skills(
-    skills_id uuid NOT NULL,
+    skill_id uuid NOT NULL,
     experience int DEFAULT 0,
     summary varchar(500),
     field_id uuid NOT NULL,
-    CONSTRAINT PK_skills PRIMARY KEY (skills_id),
+    CONSTRAINT PK_skill PRIMARY KEY (skill_id),
     CONSTRAINT FK_field FOREIGN KEY (field_id) REFERENCES fields(field_id)
 );
 
 CREATE TABLE employee_to_skills(
     employee_id uuid NOT NULL,
-    skills_id uuid NOT NULL,
+    skill_id uuid NOT NULL,
     CONSTRAINT FK_employee FOREIGN KEY (employee_id) REFERENCES employee(employee_id),
-    CONSTRAINT FK_skills FOREIGN KEY (skills_id) REFERENCES skills(skills_id)
+    CONSTRAINT FK_skill FOREIGN KEY (skill_id) REFERENCES skills(skill_id)
 );
 
 INSERT INTO Address VALUES ('bb4d5a82-dee3-408e-97fe-4fd9e1a87982', '123 Fake St', 'Unit 999', 'Test', 'MD', 67831, 'United States');

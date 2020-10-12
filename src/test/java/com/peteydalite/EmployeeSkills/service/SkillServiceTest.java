@@ -47,21 +47,21 @@ public class SkillServiceTest extends DaoIntergrationTest {
     public void getSkillsbyFieldId() {
         Field field = this.fs.getAllFields().get(0);
 
-        List<Skill> listBefore = this.skillService.getSkillsbyFieldId(field.getField_id());
+        List<Skill> listBefore = this.skillService.getSkillsbyFieldId(field.getId());
         Skill skillz = new Skill();
         skillz.setField(field);
         skillz.setExperience(66);
         skillz.setSummary("lorem ipsum");
         this.skillService.addSkill(skillz);
 
-        List<Skill> listAfter = this.skillService.getSkillsbyFieldId(field.getField_id());
+        List<Skill> listAfter = this.skillService.getSkillsbyFieldId(field.getId());
         assertEquals(listBefore.size() + 1, listAfter.size());
     }
 
     @Test
     public void getSkillById() {
         Skill expected = this.skillService.getAllSkills().get(0);
-        Skill actual = this.skillService.getSkillById(expected.getSkill_id());
+        Skill actual = this.skillService.getSkillById(expected.getId());
 
         assertEquals(expected.toString(), actual.toString());
     }
@@ -73,7 +73,7 @@ public class SkillServiceTest extends DaoIntergrationTest {
         boolean updated = this.skillService.updateSkill(toChange);
         assertEquals(true, updated);
 
-        Skill result = this.skillService.getSkillById(toChange.getSkill_id());
+        Skill result = this.skillService.getSkillById(toChange.getId());
         assertEquals(toChange.getExperience(), result.getExperience());
 
     }

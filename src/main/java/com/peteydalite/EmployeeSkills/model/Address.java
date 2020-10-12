@@ -3,7 +3,7 @@ package com.peteydalite.EmployeeSkills.model;
 import java.util.UUID;
 
 public class Address {
-    private UUID address_id;
+    private UUID id;
     private String street;
     private String suite;
     private String city;
@@ -13,8 +13,8 @@ public class Address {
 
     public Address() {};
 
-    public Address(UUID address_id, String street, String suite, String city, String region, Long postal, String country) {
-        this.address_id = address_id;
+    public Address(UUID id, String street, String suite, String city, String region, Long postal, String country) {
+        this.id = id;
         this.street = street;
         this.suite = suite;
         this.city = city;
@@ -23,12 +23,12 @@ public class Address {
         this.country = country;
     }
 
-    public UUID getAddress_id() {
-        return address_id;
+    public UUID getId() {
+        return id;
     }
 
-    public void setAddress_id(UUID address_id) {
-        this.address_id = address_id;
+    public void setId(UUID id) {
+        this.id = id;
     }
 
     public String getStreet() {
@@ -82,7 +82,7 @@ public class Address {
     @Override
     public String toString() {
         return "Address{" +
-                "address_id=" + address_id +
+                "id=" + id +
                 ", street='" + street + '\'' +
                 ", suite='" + suite + '\'' +
                 ", city='" + city + '\'' +

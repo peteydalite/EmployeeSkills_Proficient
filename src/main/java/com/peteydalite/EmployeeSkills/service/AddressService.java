@@ -22,7 +22,7 @@ public class AddressService implements AddressDao {
 
     private Address mapRowToAddress(SqlRowSet rs){
         Address temp = new Address();
-        temp.setAddress_id((java.util.UUID) rs.getObject("address_id") );
+        temp.setId((java.util.UUID) rs.getObject("address_id") );
         temp.setStreet(rs.getString("street"));
         temp.setSuite(rs.getString("suite"));
         temp.setCity(rs.getString("city"));
@@ -44,7 +44,7 @@ public class AddressService implements AddressDao {
                 allAddress.add(address);
             }
         }catch(Exception e){
-            System.out.println(e);
+            throw(e);
         }
         return allAddress;
     }
@@ -60,7 +60,7 @@ public class AddressService implements AddressDao {
                 address = mapRowToAddress(result);
             }
         }catch (Exception e){
-            System.out.println(e);
+            throw(e);
         }
 
         return address;
@@ -75,10 +75,10 @@ public class AddressService implements AddressDao {
         try{
             updated  = this.jdbcTemplate.update(sqlUpdate, updateAddress.getStreet(),
                     updateAddress.getSuite(), updateAddress.getCity(), updateAddress.getRegion(),
-                    updateAddress.getPostal(), updateAddress.getCountry(), updateAddress.getAddress_id()) ==1;
+                    updateAddress.getPostal(), updateAddress.getCountry(), updateAddress.getId()) ==1;
 
         }catch(Exception e){
-            System.out.println(e);
+            throw(e);
         }
         return updated;
     }
@@ -88,9 +88,9 @@ public class AddressService implements AddressDao {
         boolean deleted = false;
         String sqlDelete = "Delete from Address where address_id = ? ";
         try{
-            deleted = this.jdbcTemplate.update(sqlDelete, address.getAddress_id()) == 1;
+            deleted = this.jdbcTemplate.update(sqlDelete, address.getId()) == 1;
         }catch(Exception e){
-            System.out.println(e);
+            throw(e);
         }
         return  deleted;
     }
@@ -100,12 +100,12 @@ public class AddressService implements AddressDao {
         boolean added = false;
         String sqlInsert = "Insert into Address Values(?,?,?,?,?,?,?) ";
         try{
-            added = this.jdbcTemplate.update(sqlInsert, UUID.randomUUID(), newAddress.getStreet(),
+            added = this.jdbcTemplate.update(sqlInsert, newAddress.getId(), newAddress.getStreet(),
                     newAddress.getSuite(), newAddress.getCity(), newAddress.getRegion(),
                     newAddress.getPostal(), newAddress.getCountry()) ==1;
 
         }catch(Exception e){
-            System.out.println(e);
+            throw(e);
         }
         return added;
     }

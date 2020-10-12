@@ -3,7 +3,7 @@ package com.peteydalite.EmployeeSkills.model;
 import java.util.UUID;
 
 public class Skill {
-    private UUID skill_id;
+    private UUID id;
     private Field field;
     private int experience;
     private String summary;
@@ -12,19 +12,19 @@ public class Skill {
     }
 
 
-    public Skill(UUID skill_id, Field field, int experience, String summary) {
-        this.skill_id = skill_id;
+    public Skill(UUID id, Field field, int experience, String summary) {
+        this.id = id;
         this.field = field;
         this.experience = experience;
         this.summary = summary;
     }
 
-    public UUID getSkill_id() {
-        return skill_id;
+    public UUID getId() {
+        return id;
     }
 
-    public void setSkill_id(UUID skill_id) {
-        this.skill_id = skill_id;
+    public void setId(UUID id) {
+        this.id = id;
     }
 
     public Field getField() {
@@ -54,7 +54,7 @@ public class Skill {
     @Override
     public String toString() {
         return "Skill{" +
-                "skill_id=" + skill_id +
+                "skill_id=" + id +
                 ", field=" + field +
                 ", experience=" + experience +
                 ", summary='" + summary + '\'' +

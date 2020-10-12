@@ -3,24 +3,24 @@ package com.peteydalite.EmployeeSkills.model;
 import java.util.UUID;
 
 public class Field {
-    private UUID field_id;
+    private UUID id;
     private String name;
     private String type;
 
     public Field(){};
 
-    public Field(UUID field_id, String name, String type) {
-        this.field_id = field_id;
+    public Field(UUID id, String name, String type) {
+        this.id = id;
         this.name = name;
         this.type = type;
     }
 
-    public UUID getField_id() {
-        return field_id;
+    public UUID getId() {
+        return id;
     }
 
-    public void setField_id(UUID field_id) {
-        this.field_id = field_id;
+    public void setId(UUID field_id) {
+        this.id = field_id;
     }
 
     public String getName() {
@@ -42,7 +42,7 @@ public class Field {
     @Override
     public String toString() {
         return "Field{" +
-                "field_id=" + field_id +
+                "field_id=" + id +
                 ", name='" + name + '\'' +
                 ", type='" + type + '\'' +
                 '}';

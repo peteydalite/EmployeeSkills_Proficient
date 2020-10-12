@@ -46,7 +46,7 @@ public class EmployeeToSkillsService implements EmployeeToSkillsDao {
                 skillList.add(empSkill);
             }
         }catch(Exception e){
-            System.out.println(e);
+            throw(e);
         }
 
         return skillList;
@@ -64,7 +64,7 @@ public class EmployeeToSkillsService implements EmployeeToSkillsDao {
                empList.add(ets);
             }
         }catch(Exception e){
-            System.out.println(e);
+            throw(e);
         }
         return empList;
     }
@@ -76,7 +76,7 @@ public class EmployeeToSkillsService implements EmployeeToSkillsDao {
         try{
             added = this.jdbc.update(sqlInsert, employeeSkill.getEmployee_id(), employeeSkill.getSkills_id()) == 1;
         }catch(Exception e){
-            System.out.println(e);
+            throw(e);
         }
         return added;
     }
@@ -88,7 +88,7 @@ public class EmployeeToSkillsService implements EmployeeToSkillsDao {
         try{
             deleted = this.jdbc.update(sqlDelete, employeeToSkills.getEmployee_id(), employeeToSkills.getSkills_id()) == 1;
         }catch (Exception e){
-            System.out.println(e);
+            throw(e);
         }
         return deleted;
     }
@@ -100,7 +100,7 @@ public class EmployeeToSkillsService implements EmployeeToSkillsDao {
         try{
             delete = this.jdbc.update(sqlDelete, employee_id) == 1;
         }catch (Exception e){
-            System.out.println(e);
+            throw(e);
         }
         return  delete;
     }
