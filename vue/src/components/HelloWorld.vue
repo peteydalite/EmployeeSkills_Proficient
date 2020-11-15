@@ -21,7 +21,9 @@
       </thead>
       <tbody>
         <tr id="directory" v-for="employee in employees" :key="employee.id">
-          <th scope="row" id="employee.id">View</th>
+          <th scope="row" id="employee.id">
+           <router-link :to="{name: 'Profile', params: {id: employee.id}}"> View </router-link>
+            </th>
           <td>{{ employee.firstName }}</td>
           <td>{{ employee.lastName }}</td>
           <td>{{ employee.companyEmail }}</td>

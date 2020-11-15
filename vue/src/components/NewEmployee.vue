@@ -461,7 +461,7 @@
             <button type="submit" class="btn btn-primary">Submit</button>
           </div>
           <div class="clear-container">
-            <button type="button" class="btn btn-secondary">Clear</button>
+            <button v-on:click="clear" type="button" class="btn btn-secondary">Clear</button>
           </div>
         </div>
       </form>
@@ -496,6 +496,9 @@ export default {
         .catch((err) => {
           console.log(err);
         });
+    },
+    clear(){
+      this.newEmp = { address: {}, skills: [] };
     },
   },
 };
