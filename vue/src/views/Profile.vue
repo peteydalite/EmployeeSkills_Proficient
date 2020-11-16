@@ -27,8 +27,8 @@
             {{ employee.address.country }}
           </div>
           <div class="dates-container">
-            Hire Date: {{ employee.hireDate }}<br />
-            Birthdate: {{ employee.birthdate }}
+            Hire Date: {{hired}} <br />
+            Birthdate: {{birthdate }}
           </div>
         </div>
       </div>
@@ -64,6 +64,8 @@ export default {
     return {
       employee: {},
       assignedEmp: {},
+      hired: "",
+      birthdate: "",
     };
   },
   methods: {
@@ -72,6 +74,14 @@ export default {
         .then((response) => {
           if (response.status === 200) {
             this.employee = response.data;
+            
+            var hDate = this.employee.hireDate.split('-');
+            var bDate = this.employee.birthdate.split('-');
+
+            this.hired = `${hDate[1]}-${hDate[2]}-${hDate[0]}`;
+            this.birthdate = `${bDate[1]}-${bDate[2]}-${bDate[0]}`;
+
+
             this.getAssigned();
           }
         })
