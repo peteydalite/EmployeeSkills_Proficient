@@ -74,9 +74,13 @@ public class EmployeeController {
     }
 
     @RequestMapping(path="/employees/{employeeId}/skills", method = RequestMethod.POST)
-    public void addEmployeeSkills(@PathVariable("employeeId")UUID employee_id, @RequestBody Skill skill){
+    public Skill[] addEmployeeSkills(@PathVariable("employeeId")UUID employee_id, @RequestBody Skill skill){
         this.skillDao.addSkill(skill);
         EmployeeToSkills ets = new EmployeeToSkills(employee_id, skill.getId());
+        this.etsDao.addSkillToEmployee(ets);
+        Employee emp = this.empDao.getEmployeeById(employee_id);
+
+        return emp.getSkills();
 
     }
 

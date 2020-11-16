@@ -124,6 +124,7 @@ export default {
 }
 .skills-container {
   border: 1px solid lightgrey;
+  background-color: whitesmoke;
   border-radius: 8px;
   margin-left: 10px;
   margin-right: 10px;
@@ -168,5 +169,8 @@ export default {
 }
 .additional-container {
   margin-top: 10px;
+}
+.skills{
+  margin: 4px;
 }
 </style>
