@@ -34,21 +34,32 @@
       </div>
       <div class="additional-container">
         <div id="c-header">Assigned To Employee</div>
+        <router-link v-on:click.prevent="refresh()" to >
+          {{ assignedEmp.firstName }} {{ assignedEmp.lastName }}
+        </router-link>
       </div>
     </div>
     <div class="skills-container">
       <h2>Skills</h2>
+      <div class="skills"
+          v-for="empSkill in employee.skills" :key="empSkill.id"
+      >
+        <Skill :skill="empSkill" />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import EmpService from "@/services/EmployeeService";
+import Skill from "@/components/Skill.vue";
 // import { component } from 'vue/types/umd';
 
 export default {
   name: "Profile",
-  components: {},
+  components: {
+    Skill
+    },
   data() {
     return {
       employee: {},
@@ -61,16 +72,15 @@ export default {
         .then((response) => {
           if (response.status === 200) {
             this.employee = response.data;
-            console.log(this.employee);
+            this.getAssigned();
           }
         })
         .catch((err) => {
           console.log(err);
         });
-
-      this.getAssigned();
     },
     getAssigned() {
+      console.log(this.employee.assignedTo);
       if (this.employee.assignedTo != null) {
         EmpService.getEmployeeInfo(this.employee.assignedTo)
           .then((response) => {
@@ -84,9 +94,15 @@ export default {
           });
       }
     },
+    refresh(){
+      // this.$router.push(`/profile/${this.assignedEmp.id}`);
+    }
+  },
+  created() {
+    this.getEmployee();
   },
   mounted() {
-    this.getEmployee();
+    // this.getAssigned();
   },
 };
 </script>
@@ -104,6 +120,7 @@ export default {
   border-radius: 8px;
   margin-left: 10px;
   margin-right: 10px;
+  height: 75%;
 }
 .skills-container {
   border: 1px solid lightgrey;
@@ -113,7 +130,7 @@ export default {
 }
 .img-container {
   margin-top: 5px;
-  height: 33vh;
+  height: 22vh;
 }
 #prof-pic {
   border: 1px solid black;
@@ -124,7 +141,7 @@ export default {
 }
 .contact-container {
   display: grid;
-  margin-top: 20px;
+  margin-top: 5%;
 }
 .role-container {
   margin-top: 9px;
@@ -142,7 +159,7 @@ export default {
 }
 .address-container {
   align-self: center;
-  justify-self: start;
+  justify-self: center;
   margin-left: 5px;
 }
 .dates-container {

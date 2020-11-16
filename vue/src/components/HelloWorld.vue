@@ -67,7 +67,7 @@ export default {
       });
     },
   },
-  mounted: function () {
+  created() {
     this.getEmployees();
   },
 };
