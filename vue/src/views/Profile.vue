@@ -27,24 +27,67 @@
             {{ employee.address.country }}
           </div>
           <div class="dates-container">
-            Hire Date: {{hired}} <br />
-            Birthdate: {{birthdate }}
+            Hire Date: {{ hired }} <br />
+            Birthdate: {{ birthdate }}
           </div>
         </div>
       </div>
       <div class="additional-container">
         <div id="c-header">Assigned To Employee</div>
-        <router-link v-on:click.prevent="refresh()" to >
+        <router-link v-on:click.prevent="refresh()" to>
           {{ assignedEmp.firstName }} {{ assignedEmp.lastName }}
         </router-link>
       </div>
     </div>
     <div class="skills-container">
       <h2>Skills</h2>
-      <div class="skills"
-          v-for="empSkill in employee.skills" :key="empSkill.id"
+      <div
+        class="skills"
+        v-for="empSkill in employee.skills"
+        :key="empSkill.id"
       >
         <Skill :skill="empSkill" />
+      </div>
+      <button type="button" v-on:click.prevent="launch()"
+      class="btn btn-outline-dark" 
+      data-toggle="modal"
+      data-target="#exampleModal">Add Skills</button>
+      <div
+        class="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="false"
+      >
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">...</div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                Close
+              </button>
+              <button type="button" class="btn btn-primary">
+                Save changes
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -58,8 +101,8 @@ import Skill from "@/components/Skill.vue";
 export default {
   name: "Profile",
   components: {
-    Skill
-    },
+    Skill,
+  },
   data() {
     return {
       employee: {},
@@ -74,13 +117,12 @@ export default {
         .then((response) => {
           if (response.status === 200) {
             this.employee = response.data;
-            
-            var hDate = this.employee.hireDate.split('-');
-            var bDate = this.employee.birthdate.split('-');
+
+            var hDate = this.employee.hireDate.split("-");
+            var bDate = this.employee.birthdate.split("-");
 
             this.hired = `${hDate[1]}-${hDate[2]}-${hDate[0]}`;
             this.birthdate = `${bDate[1]}-${bDate[2]}-${bDate[0]}`;
-
 
             this.getAssigned();
           }
@@ -104,9 +146,9 @@ export default {
           });
       }
     },
-    refresh(){
+    refresh() {
       // this.$router.push(`/profile/${this.assignedEmp.id}`);
-    }
+    },
   },
   created() {
     this.getEmployee();
@@ -180,7 +222,7 @@ export default {
 .additional-container {
   margin-top: 10px;
 }
-.skills{
+.skills {
   margin: 4px;
 }
 </style>
