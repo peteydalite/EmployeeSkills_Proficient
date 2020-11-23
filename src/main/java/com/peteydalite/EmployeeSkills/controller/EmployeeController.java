@@ -2,9 +2,11 @@ package com.peteydalite.EmployeeSkills.controller;
 
 import com.peteydalite.EmployeeSkills.dao.EmployeeDao;
 import com.peteydalite.EmployeeSkills.dao.EmployeeToSkillsDao;
+import com.peteydalite.EmployeeSkills.dao.FieldDao;
 import com.peteydalite.EmployeeSkills.dao.SkillDao;
 import com.peteydalite.EmployeeSkills.model.Employee;
 import com.peteydalite.EmployeeSkills.model.EmployeeToSkills;
+import com.peteydalite.EmployeeSkills.model.Field;
 import com.peteydalite.EmployeeSkills.model.Skill;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -102,7 +104,7 @@ public class EmployeeController {
     }
 
     @RequestMapping(path="/employees/{employeeId}/skills/{skillId}", method = RequestMethod.PUT)
-    public void updateEmployeeSkill(@PathVariable("employeeId")UUID employee_id, @PathVariable("skillId")UUID skill_id, @RequestBody Skill skill){
+    public Employee updateEmployeeSkill(@PathVariable("employeeId")UUID employee_id, @PathVariable("skillId")UUID skill_id, @RequestBody Skill skill){
         Employee emp = this.empDao.getEmployeeById(employee_id);
         Skill[] skills = emp.getSkills();
 
@@ -114,6 +116,7 @@ public class EmployeeController {
                 break;
             }
         }
+        return this.empDao.getEmployeeById(employee_id);
     }
 
     @RequestMapping(path="/employees/{employeeId}/skills/{skillId}", method = RequestMethod.DELETE)
@@ -136,4 +139,5 @@ public class EmployeeController {
         }
         return deleted;
     }
+
 }

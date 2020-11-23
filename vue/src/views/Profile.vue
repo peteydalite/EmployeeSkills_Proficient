@@ -48,47 +48,7 @@
       >
         <Skill :skill="empSkill" />
       </div>
-      <button type="button" v-on:click.prevent="launch()"
-      class="btn btn-outline-dark" 
-      data-toggle="modal"
-      data-target="#exampleModal">Add Skills</button>
-      <div
-        class="modal fade"
-        id="exampleModal"
-        tabindex="-1"
-        role="dialog"
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="false"
-      >
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-              <button
-                type="button"
-                class="close"
-                data-dismiss="modal"
-                aria-label="Close"
-              >
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">...</div>
-            <div class="modal-footer">
-              <button
-                type="button"
-                class="btn btn-secondary"
-                data-dismiss="modal"
-              >
-                Close
-              </button>
-              <button type="button" class="btn btn-primary">
-                Save changes
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+      <NewSkill />
     </div>
   </div>
 </template>
@@ -96,12 +56,15 @@
 <script>
 import EmpService from "@/services/EmployeeService";
 import Skill from "@/components/Skill.vue";
+import NewSkill from "@/components/NewSkillModal.vue";
+
 // import { component } from 'vue/types/umd';
 
 export default {
   name: "Profile",
   components: {
     Skill,
+    NewSkill,
   },
   data() {
     return {
@@ -109,6 +72,7 @@ export default {
       assignedEmp: {},
       hired: "",
       birthdate: "",
+      
     };
   },
   methods: {
@@ -148,6 +112,10 @@ export default {
     },
     refresh() {
       // this.$router.push(`/profile/${this.assignedEmp.id}`);
+    },
+    flip() {
+      this.modalOn = !this.modalOn;
+      console.log("clicked!")
     },
   },
   created() {
