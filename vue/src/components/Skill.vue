@@ -35,7 +35,8 @@ export default {
     text-align: left;
 }
 .category{
-    justify-self: center;
+    /* justify-self: center; */
     text-align: left;
+    word-wrap: break-word;
 }
 </style>

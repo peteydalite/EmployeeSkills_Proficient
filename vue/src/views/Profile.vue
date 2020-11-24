@@ -48,7 +48,7 @@
       >
         <Skill :skill="empSkill" />
       </div>
-      <NewSkill />
+      <NewSkill :employee="employee" v-on:childToParent="onSkillSave" /> 
     </div>
   </div>
 </template>
@@ -72,7 +72,7 @@ export default {
       assignedEmp: {},
       hired: "",
       birthdate: "",
-      
+      newSkill: {},
     };
   },
   methods: {
@@ -110,8 +110,8 @@ export default {
           });
       }
     },
-    refresh() {
-      // this.$router.push(`/profile/${this.assignedEmp.id}`);
+    onSkillSave(newSkills) {
+      this.employee.skills = newSkills;
     },
     flip() {
       this.modalOn = !this.modalOn;

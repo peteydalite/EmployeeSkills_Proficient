@@ -17,5 +17,12 @@ export default{
     },
     getEmployeeInfo(id){
         return http.get('/employees/' + id)
+    },
+    addEmployeeSkill(id, newSkill){
+        newSkill.id = uuidv4();
+        return http.post(`/employees/${id}/skills`, newSkill)
+    },
+    getFields(){
+        return http.get('/fields');
     }
 }
