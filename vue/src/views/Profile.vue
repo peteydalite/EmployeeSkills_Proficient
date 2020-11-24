@@ -41,6 +41,7 @@
     </div>
     <div class="skills-container">
       <h2>Skills</h2>
+      <NewSkill :employee="employee" v-on:childToParent="onSkillSave" /> 
       <div
         class="skills"
         v-for="empSkill in employee.skills"
@@ -48,7 +49,7 @@
       >
         <Skill :skill="empSkill" />
       </div>
-      <NewSkill :employee="employee" v-on:childToParent="onSkillSave" /> 
+      
     </div>
   </div>
 </template>

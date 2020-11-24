@@ -31,8 +31,9 @@ export default {
     margin-right: 10px;
 }
 .type{
-    justify-self: center;
+    justify-self: left;
     text-align: left;
+    padding-left: 5px;
 }
 .category{
     /* justify-self: center; */
